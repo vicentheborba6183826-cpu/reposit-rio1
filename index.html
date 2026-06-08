@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEDIOTEC SENAC - 1º ANO E - GITHUB E HTML</title>
+
+<!-- 
+  [DICA DE CUSTOMIZAÇÃO]:
+  As variáveis abaixo controlam as cores de todo o painel.
+  Quer deixar o projeto com a sua cara? Experimente mudar os códigos hexadecimais (ex: #f58220)
+  para as cores que você mais gosta e veja o resultado no navegador!
+-->
+<style>
+:root {
+  --bg-dark: #07111f;
+  --bg-panel: #0f1c2e;
+  --border-blue: #005ca9;
+  --neon-blue: #2f8cff;
+  --senac-orange: #f58220;
+  --text-main: #f5f8fc;
+  --text-muted: #9fb3c8;
+  --shadow-blue: rgba(0, 92, 169, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Courier New", monospace;
+  color: var(--text-main);
+  background: radial-gradient(circle at center, #0c1c35 0%, var(--bg-dark) 70%);
+  padding: 24px;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, .25) 50%);
+  background-size: 100% 4px;
+  opacity: .15;
+  pointer-events: none;
+}
+
+.shell {
+  width: min(1400px, 100%);
+  margin: auto;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+}
+
+.sidebar {
+  background: var(--bg-panel);
+  border: 2px solid var(--border-blue);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .5);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.sidebar::before {
+  content: "MISSION_STATUS: ONLINE";
+  position: absolute;
+  bottom: 12px;
+  left: 20px;
+  font-size: .7rem;
+  color: var(--senac-orange);
+  letter-spacing: 1px;
+}
+
+.system-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.system-title span {
+  display: inline-block;
+  width: max-content;
+  color: var(--senac-orange);
+  border: 1px solid var(--senac-orange);
+  padding: 4px 8px;
+  font-size: .8rem;
+}
+
+.system-title span.location {
+  color: #fff;
+  border-color: var(--border-blue);
+  background-color: var(--border-blue);
+}
+
+.sys-stat-box {
+  border-left: 3px solid var(--border-blue);
+  padding-left: 12px;
+  color: var(--text-muted);
+  font-size: .85rem;
+}
+
+.sys-stat-box div {
+  margin-bottom: 8px;
+}
+
+.sys-stat-box b {
+  color: var(--text-main);
+}
+
+.main-console {
+  background: var(--bg-panel);
+  border: 2px solid var(--border-blue);
+  box-shadow: 0 12px 40px var(--shadow-blue);
+  padding: 35px;
+}
+
+.console-header {
+  border-bottom: 1px solid var(--border-blue);
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+}
+
+.console-header h2 {
+  color: var(--senac-orange);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.console-manifesto {
+  background: rgba(0, 0, 0, .35);
+  border: 1px solid var(--border-blue);
+  padding: 25px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.console-manifesto ul {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+
+.console-manifesto li {
+  margin-bottom: 8px;
+}
+
+.section-label {
+  color: var(--text-muted);
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.action-btn {
+  background: #09111d;
+  border: 2px solid var(--border-blue);
+  color: white;
+  padding: 18px;
+  min-height: 90px;
+  cursor: pointer;
+  text-align: left;
+  transition: .2s;
+  position: relative;
+}
+
+.action-btn:hover {
+  border-color: var(--senac-orange);
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(245, 130, 32, .25);
+}
+
+.action-btn::after {
+  content: "//";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--neon-blue);
+}
+
+.action-btn:hover::after {
+  color: var(--senac-orange);
+}
+
+.btn-title {
+  display: block;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.btn-subtitle {
+  color: var(--text-muted);
+  font-size: .8rem;
+}
+
+.footer-box {
+  margin-top: 30px;
+  border-top: 1px solid var(--border-blue);
+  padding-top: 20px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+@media(max-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- [ESTRUTURA DO DASHBOARD] Toda a interface do console está contida dentro da tag <main> -->
+<main class="shell">
+  <div class="dashboard">
+
+    <!-- BARRA LATERAL: Identificação do Curso, Professor e Status da Missão -->
+    <aside class="sidebar">
+      <h1 class="system-title">
+        MEDIOTEC SENAC
+        <span class="location">Recife</span>
+        <span>1º ANO E</span>
+      </h1>
+
+      <div class="sys-stat-box">
+        <div>PROFESSOR: <b>LUIZ CAVALCANTI</b></div>
+        <div>MISSÃO: <b>GITHUB + HTML</b></div>
+      </div>
+
+      <div class="sys-stat-box" style="margin-top: auto; margin-bottom: 25px;">
+        <div>
+          Sua missão é criar seu primeiro portfólio online utilizando HTML, GitHub e GitHub Pages.
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONSOLE PRINCIPAL: Onde estão os objetivos e o checklist do projeto -->
+    <section class="main-console">
+      <header class="console-header">
+        
+        <!-- [AÇÃO REQUERIDA]: Apague o texto entre colchetes abaixo e digite o seu nome completo -->
+        <h2>MISSÃO 01 // MEU PRIMEIRO PORTFÓLIO - [DIGITE SEU NOME AQUI]</h2>
+      
+      </header>
+
+      <div class="console-manifesto">
+        <strong>OBJETIVO</strong>
+        <br><br>
+        Criar uma página pessoal utilizando HTML e CSS.
+        <br><br>
+        O portfólio deverá conter:
+        
+        <!-- [CHECKLIST]: Lembre-se de criar tags HTML correspondentes para cada um destes itens no seu arquivo final -->
+        <ul>
+          <li>Nome completo</li>
+          <li>Apresentação pessoal</li>
+          <li>Jogos favoritos</li>
+          <li>Tecnologias que deseja aprender</li>
+          <li>Projetos em que já trabalhou/está trabalhando</li>
+        </ul>
+        <br>
+        Após concluir, publique o site utilizando GitHub Pages.
+      </div>
+
+      <div class="section-label">
+        [ ETAPAS DA MISSÃO ]
+      </div>
+
+      <!-- 
+        [DICA DE CÓDIGO]: 
+        Estes botões representam o seu fluxo de trabalho. 
+        À medida que avançarmos na aula, você aprenderá a usar a tag <a> para transformar
+        esses botões em links reais que abrem o seu repositório ou o site do GitHub!
+      -->
+      <div class="action-grid">
+        <button class="action-btn">
+          <span class="btn-title">ETAPA 01</span>
+          <span class="btn-subtitle">CRIAR CONTA NO GITHUB</span>
+        </button>
+
+        <button class="action-btn">
+          <span class="btn-title">ETAPA 02</span>
+          <span class="btn-subtitle">CRIAR REPOSITÓRIO</span>
+        </button>
+
+        <button class="action-btn">
+          <span class="btn-title">ETAPA 03</span>
+          <span class="btn-subtitle">CRIAR INDEX.HTML</span>
+        </button>
+
+        <button class="action-btn">
+          <span class="btn-title">ETAPA 04</span>
+          <span class="btn-subtitle">REALIZAR PRIMEIRO COMMIT</span>
+        </button>
+
+        <button class="action-btn">
+          <span class="btn-title">ETAPA 05</span>
+          <span class="btn-subtitle">PUBLICAR NO GITHUB PAGES</span>
+        </button>
+      </div>
+
+      <div class="footer-box">
+        <strong>DESAFIO EXTRA</strong>
+        <br><br>
+        
+        <!-- [UPGRADE]: Quer ir além? Tente implementar os itens abaixo para subir o nível do seu portfólio! -->
+        ✔ Adicione uma foto ou avatar.<br>
+        ✔ Inclua uma seção "Projetos do Curso".<br>
+        ✔ Adicione links para GitHub e redes sociais.<br>
+        ✔ Crie um design único para seu portfólio.
+      </div>
+    </section>
+
+  </div>
+</main>
+
+</body>
+</html>
